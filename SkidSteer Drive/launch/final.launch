@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <include file="$(find skidsteer)/launch/robo.launch"/>
+  <include file="$(find skidsteer)/launch/rviz.launch"/>
+  <node name="keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"/>
+</launch>
