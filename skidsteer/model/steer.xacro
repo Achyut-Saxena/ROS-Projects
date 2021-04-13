@@ -1,0 +1,193 @@
+<?xml version="1.0" ?>
+
+<robot name="skidsteer" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <gazebo reference="link_chassis">
+    <material>Gazebo/Green</material>
+  </gazebo>
+  <gazebo reference="link_front_right_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  <gazebo reference="link_front_left_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  <gazebo reference="link_back_right_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  <gazebo reference="link_back_left_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  
+  <gazebo>
+      <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <updateRate>100.0</updateRate>
+      <robotNamespace>/</robotNamespace>
+      <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+      <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+      <leftRearJoint>back_left_wheel_joint</leftRearJoint>
+      <rightRearJoint>back_right_wheel_joint</rightRearJoint>
+      <wheelSeparation>0.3</wheelSeparation>
+      <wheelDiameter>0.2</wheelDiameter>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <torque>20</torque>
+      <topicName>cmd_vel</topicName>
+      <broadcastTF>false</broadcastTF>
+    </plugin>
+  </gazebo>
+  
+  <link name="link_chassis">
+    <!-- pose and inertial -->
+    <pose>0 0 0.1 0 0 0</pose>
+    <inertial>
+      <mass value="5"/>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <inertia ixx="0.40833333333333" ixy="0" ixz="0" iyy="0.24166666666667"
+        iyz="0" izz="0.24166666666667"/>
+    </inertial>
+    <!-- body -->
+    <collision name="collision_chassis">
+      <geometry>
+        <box size="0.5 0.5 0.08"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.5 0.5 0.08"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+  
+  <!-- defining wheels -->
+
+  <link name="link_front_right_wheel">
+    <inertial>
+      <mass value="0.2"/>
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+      <inertia ixx="0.0126666666666667" ixy="0" ixz="0" iyy="0.0126666666666667"
+        iyz="0" izz="0.025"/>
+    </inertial>
+    <collision name="link_front_right_wheel_collision">
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.1"/>
+    </geometry>
+    </collision>
+    <visual name="link_front_right_wheel_visual">
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.1"/>
+    </geometry>
+    </visual>
+  </link>
+
+  <link name="link_front_left_wheel">
+    <inertial>
+      <mass value="0.2"/>
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+      <inertia ixx="0.0126666666666667" ixy="0" ixz="0" iyy="0.0126666666666667"
+        iyz="0" izz="0.025"/>
+    </inertial>
+    <collision name="link_front_left_wheel_collision">
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.1"/>
+    </geometry>
+    </collision>
+    <visual name="link_front_left_wheel_visual">
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.1"/>
+    </geometry>
+    </visual>
+  </link>
+
+  <link name="link_back_right_wheel">
+    <inertial>
+      <mass value="0.2"/>
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+      <inertia ixx="0.0126666666666667" ixy="0" ixz="0" iyy="0.0126666666666667"
+        iyz="0" izz="0.025"/>
+    </inertial>
+    <collision name="link_back_right_wheel_collision">
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.1"/>
+    </geometry>
+    </collision>
+    <visual name="link_back_right_wheel_visual">
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.1"/>
+    </geometry>
+    </visual>
+  </link>
+
+  <link name="link_back_left_wheel">
+    <inertial>
+      <mass value="0.2"/>
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+      <inertia ixx="0.0126666666666667" ixy="0" ixz="0" iyy="0.0126666666666667"
+        iyz="0" izz="0.025"/>
+    </inertial>
+    <collision name="link_back_left_wheel_collision">
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.1"/>
+    </geometry>
+    </collision>
+    <visual name="link_back_left_wheel_visual">
+      <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.1"/>
+    </geometry>
+    </visual>
+  </link>
+
+
+  <!-- defining joints -->
+
+  <joint name="front_right_wheel_joint" type="continuous">
+    <origin rpy="0 0 0" xyz="0.27 0.27 0"/>
+    <child link="link_front_right_wheel"/>
+    <parent link="link_chassis"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <limit effort="100" velocity="1"/>
+    <joint_properties damping="1.0" friction="1.0"/>
+  </joint>
+  
+  <joint name="front_left_wheel_joint" type="continuous">
+    <origin rpy="0 0 0" xyz="0.27 -0.27 0"/>
+    <child link="link_front_left_wheel"/>
+    <parent link="link_chassis"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <limit effort="100" velocity="1"/>
+    <joint_properties damping="1.0" friction="1.0"/>
+  </joint>
+
+  <joint name="back_right_wheel_joint" type="continuous">
+    <origin rpy="0 0 0" xyz="-0.27 0.27 0"/>
+    <child link="link_back_right_wheel"/>
+    <parent link="link_chassis"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <limit effort="100" velocity="1"/>
+    <joint_properties damping="1.0" friction="1.0"/>
+  </joint>
+  
+  <joint name="back_left_wheel_joint" type="continuous">
+    <origin rpy="0 0 0" xyz="-0.27 -0.27 0"/>
+    <child link="link_back_left_wheel"/>
+    <parent link="link_chassis"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <limit effort="100" velocity="1"/>
+    <joint_properties damping="1.0" friction="1.0"/>
+  </joint>
+  <xacro:include filename="$(find skidsteer)/model/lidar.xacro"/>
+  <joint name="lidarGlue" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.05"/>     
+    <parent link="link_chassis"/>
+    <child link="laz_base"/>
+  </joint>
+
+</robot>
