@@ -32,5 +32,10 @@
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find skidsteer)/rviz/config.rviz"/>
 
+  <node name="pcl_laser" pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" output="screen">
+    <param name="angle_min" value="-1.57"/>
+    <param name="angle_max" value="1.57"/>
+  </node>
+
 </launch>
 
