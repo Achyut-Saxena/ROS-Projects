@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<launch>
-  <include file="$(find lidskid)/launch/final.launch"/>
-  <!-- <include file="$(find t6)/launch/rviz.launch"/> -->
-  <node pkg="lidskid" name="nav" type="controller.py" output="screen"/>
-</launch>
-
