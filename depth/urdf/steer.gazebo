@@ -76,7 +76,7 @@
     </plugin>
   </gazebo>
     <gazebo reference="kinect_link">
-    <sensor type="depth" name="intelrealsenseD435i">
+    <sensor type="depth" name="depth_camera">
       <always_on>1</always_on>
       <visualize>true</visualize>
       <camera>
@@ -94,11 +94,11 @@
           <far>100</far>
         </clip>
       </camera>
-      <plugin name="intelrealsense" filename="libgazebo_ros_openni_kinect.so">
+      <plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
         <alwaysOn>true</alwaysOn>
         <updateRate>10.0</updateRate>
         <cameraName>camera</cameraName>
-        <frameName>camera_depth_frame</frameName>
+        <frameName>kinect_link</frameName>
         <imageTopicName>/camera/color/image_raw</imageTopicName>
         <depthImageTopicName>/camera/depth/image_rect_raw</depthImageTopicName>
         <pointCloudTopicName>depth/points</pointCloudTopicName>
